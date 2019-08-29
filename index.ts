@@ -1,9 +1,15 @@
-import * as pluralize from 'pluralize'
+import { spawn } from 'child_process';
+
 /**
-* @Method: Returns the plural form of any noun.
+* @Method: Runs a Dotscience command task.
 * @Param {string}
 * @Return {string}
 */
-export function getPlural (str: any) : string {
-  return pluralize.plural(str)
+export function dsRun (str: any) : string {
+  const child = spawn('ls');
+
+  child.stdout.on('data', (data) => {
+    console.log(data.toString());
+  });
+  return ""
 }

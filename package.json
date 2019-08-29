@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "a prototypical typescript wrapper for ds run & friends",
   "main": "index.js",
-  "types" : "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
@@ -19,10 +19,9 @@
   },
   "homepage": "https://github.com/dotmesh-io/dotscience-typescript-sdk#readme",
   "devDependencies": {
-    "@types/pluralize": "0.0.29",
     "typescript": "^3.6.2"
   },
   "dependencies": {
-    "pluralize": "^8.0.0"
+    "child_process": "^1.0.2"
   }
 }
