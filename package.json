@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/dotmesh-io/dotscience-typescript-sdk#readme",
   "devDependencies": {
+    "@types/node": "^12.7.2",
     "typescript": "^3.6.2"
   },
   "dependencies": {
