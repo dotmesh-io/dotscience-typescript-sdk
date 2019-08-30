@@ -29,7 +29,7 @@ export async function dsLogin (apiKey: string, username: string) {
 * @Param {string}
 * @Return {string}
 */
-export async function dsRun (apiKey: string, username: string, hostname: string, project: string, command: string, image: string) {
+export async function dsRun (apiKey: string, username: string, hostname: string, project: string, command: string, image: string) : string {
   // set the url first - if blank, don't set it
   if(hostname != "") {
     dsSetUrl(hostname)
@@ -38,4 +38,8 @@ export async function dsRun (apiKey: string, username: string, hostname: string,
   await dsLogin(apiKey, username)
   // run ds run!
   const child = spawn('ds', ['run', '-p', project, '-I', image, '--', command]);
+
+  for await (const data of child.stdout) {
+    console.log(`stdout from ds run: ${data}`);
+  };
 }
