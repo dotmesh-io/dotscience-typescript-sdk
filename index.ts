@@ -24,6 +24,28 @@ export async function dsLogin (apiKey: string, username: string) {
   }
   
 }
+
+function execPromise (command: string, args: Array<string>) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args)
+
+    child.stdout.on('data', (data) => {
+      console.log(`stdout: ${data}`)
+    })
+
+    child.stderr.on('data', (data) => {
+      console.log(`stderr: ${data}`)
+    })
+
+    child.on('close', (code) => {
+      if (code !== 0)
+        console.error(`Command execution failed with code: ${code}`)
+      else
+        console.log(`Command execution completed with code: ${code}`)
+      resolve()
+    })
+  })
+}
 /**
 * @Method: Runs a Dotscience command task.
 * @Param {string}
@@ -38,17 +60,6 @@ export async function dsRun (apiKey: string, username: string, hostname: string,
   await dsLogin(apiKey, username)
   
   // run ds run!
-  const child = spawn('ds', ['run', '-v', '-p', project, '-I', image, '--', 'bash', '-c', command]);
-  console.log(`started command: ds run -v -p ${project} -I ${image} -- bash -c ${command}`)
-  if(child.stdout != null) {
-    child.stdout.on('data', (data: object) => {
-    console.log(data.toString());
-    });
-    
-  }
-  if(child.stderr != null) {
-    child.stderr.on('data', (data: object) => {
-      console.log("err: " + data.toString());
-    });
-  }
+  await execPromise("ds", ['run', '-v', '-p', project, '-I', image, '--', 'bash', '-c', command])
+  console.log(`finished command: ds run -v -p ${project} -I ${image} -- bash -c ${command}`)
 }
