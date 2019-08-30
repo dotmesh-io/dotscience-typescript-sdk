@@ -29,20 +29,26 @@ function execPromise (command: string, args: Array<string>) : Promise<Array<stri
   return new Promise((resolve, reject) => {
     const child = spawn(command, args)
     let output: Array<string> = [];
+    let err: Array<string> = [];
     child.stdout.on('data', (data) => {
       output.push(data)
     })
 
     child.stderr.on('data', (data) => {
-      console.log(`stderr: ${data}`)
+      err.push(data)
     })
 
     child.on('close', (code) => {
       if (code !== 0)
-        console.error(`Command execution failed with code: ${code}`)
-      else
+        {
+          console.error(`Command execution failed with code: ${code}`)
+          reject(err)
+        }
+      else {
         console.log(`Command execution completed with code: ${code}`)
-      resolve(output)
+        resolve(output)
+      } 
+        
     })
   })
 }
