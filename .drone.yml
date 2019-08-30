@@ -27,7 +27,7 @@ steps:
     status: [ success, failure ]
   settings:
     webhook:
-      from_secret: slack_url
+      from_secret: slack_webhook
     channel: general
     username: drone
     icon_url: https://i.pinimg.com/originals/51/29/a4/5129a48ddad9e8408d2757dd10eb836f.jpg
