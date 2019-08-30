@@ -25,12 +25,12 @@ export async function dsLogin (apiKey: string, username: string) {
   
 }
 
-function execPromise (command: string, args: Array<string>) {
+function execPromise (command: string, args: Array<string>) : Promise<Array<string>> {
   return new Promise((resolve, reject) => {
     const child = spawn(command, args)
-
+    let output: Array<string> = [];
     child.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`)
+      output.push(data)
     })
 
     child.stderr.on('data', (data) => {
@@ -42,7 +42,7 @@ function execPromise (command: string, args: Array<string>) {
         console.error(`Command execution failed with code: ${code}`)
       else
         console.log(`Command execution completed with code: ${code}`)
-      resolve()
+      resolve(output)
     })
   })
 }
@@ -51,7 +51,7 @@ function execPromise (command: string, args: Array<string>) {
 * @Param {string}
 * @Return {string}
 */
-export async function dsRun (apiKey: string, username: string, hostname: string, project: string, command: string, image: string) {
+export async function dsRun (apiKey: string, username: string, hostname: string, project: string, command: string, image: string) : Promise<Array<string>> {
   // set the url first - if blank, don't set it
   if(hostname != "") {
     dsSetUrl(hostname)
@@ -60,6 +60,7 @@ export async function dsRun (apiKey: string, username: string, hostname: string,
   await dsLogin(apiKey, username)
   
   // run ds run!
-  await execPromise("ds", ['run', '-v', '-p', project, '-I', image, '--', 'bash', '-c', command])
+  let output: Array<string> = await execPromise("ds", ['run', '-v', '-p', project, '-I', image, '--', 'bash', '-c', command])
   console.log(`finished command: ds run -v -p ${project} -I ${image} -- bash -c ${command}`)
+  return output
 }
