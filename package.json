@@ -1,11 +1,11 @@
 {
-  "name": "dotscience-typescript-sdk",
+  "name": "@dotscience/dotscience-typescript-sdk",
   "version": "0.0.1",
   "description": "a prototypical typescript wrapper for ds run & friends",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha -r ts-node/register -r ignore-styles *.spec.ts",
     "build": "tsc"
   },
   "repository": {
@@ -23,6 +23,7 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
     "chai": "^4.2.0",
+    "ignore-styles": "^5.0.1",
     "mocha": "^6.2.0",
     "ts-node": "^8.3.0",
     "typescript": "^3.6.2"
