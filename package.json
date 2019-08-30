@@ -1,5 +1,5 @@
 {
-  "name": "dotscience-typescript-sdk",
+  "name": "@dotscience/dotscience-typescript-sdk",
   "version": "0.0.1",
   "description": "a prototypical typescript wrapper for ds run & friends",
   "main": "dist/index.js",
