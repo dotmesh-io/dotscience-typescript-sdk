@@ -23,6 +23,7 @@
     "typescript": "^3.6.2"
   },
   "dependencies": {
+    "@rauschma/stringio": "^1.4.0",
     "child_process": "^1.0.2"
   }
 }
