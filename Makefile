@@ -12,4 +12,4 @@ drone-publish:
 	git config --global user.email "tools@dotscience.com"
 	git config --global user.name "drone"
 	npm version ${DRONE_TAG}
-	npm publish
+	npm publish --access public
