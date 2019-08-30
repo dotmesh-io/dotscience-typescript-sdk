@@ -2,7 +2,7 @@
   "name": "dotscience-typescript-sdk",
   "version": "0.0.1",
   "description": "a prototypical typescript wrapper for ds run & friends",
-  "main": "index.js",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
