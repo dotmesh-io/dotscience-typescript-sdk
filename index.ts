@@ -38,8 +38,8 @@ export async function dsRun (apiKey: string, username: string, hostname: string,
   await dsLogin(apiKey, username)
   
   // run ds run!
-  const child = spawn('ds', ['run', '-v', '-p', project, '-I', image, '--', command]);
-  console.log(`started command: ds run -v -p ${project} -I ${image} -- ${command}`)
+  const child = spawn('ds', ['run', '-v', '-p', project, '-I', image, '--', 'bash', '-c', command]);
+  console.log(`started command: ds run -v -p ${project} -I ${image} -- bash -c ${command}`)
   if(child.stdout != null) {
     child.stdout.on('data', (data: object) => {
     console.log(data.toString());
