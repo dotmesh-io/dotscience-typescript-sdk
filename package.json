@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha -r ts-node/register -r ignore-styles src/**/*.spec.ts",
+    "test": "mocha -r ts-node/register -r ignore-styles *.spec.ts",
     "build": "tsc"
   },
   "repository": {
