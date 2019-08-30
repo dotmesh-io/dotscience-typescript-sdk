@@ -29,7 +29,7 @@ export async function dsLogin (apiKey: string, username: string) {
 * @Param {string}
 * @Return {string}
 */
-export async function dsRun (apiKey: string, username: string, hostname: string, project: string, command: string, image: string) : string {
+export async function dsRun (apiKey: string, username: string, hostname: string, project: string, command: string, image: string) {
   // set the url first - if blank, don't set it
   if(hostname != "") {
     dsSetUrl(hostname)
