@@ -1,4 +1,3 @@
-import { dsSetUrl } from '.';
 import { expect } from 'chai';
 import 'mocha';
 
