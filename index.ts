@@ -1,16 +1,6 @@
 import { spawn } from 'child_process';
 import {streamWrite, streamEnd, onExit} from '@rauschma/stringio';
 
-
-export function dsSetUrl (hostname: string) : string {
-  const child = spawn('ds', ['set', 'server-url', hostname]);
-
-  child.stdout.on('data', (data) => {
-    console.log(data.toString());
-  });
-  return ""
-}
-
 export async function dsLogin (apiKey: string, username: string) {
   const child = spawn('ds', ['login', username], {stdio: ['pipe', process.stdout, process.stderr]});
 
@@ -60,7 +50,8 @@ function execPromise (command: string, args: Array<string>) : Promise<Array<stri
 export async function dsRun (apiKey: string, username: string, hostname: string, project: string, command: string, image: string) : Promise<Array<string>> {
   // set the url first - if blank, don't set it
   if(hostname != "") {
-    dsSetUrl(hostname)
+    let hnameOutput: Array<string> = await execPromise("ds", ['set', 'server-url', hostname])
+    console.log(hnameOutput.join("\n"))
   }
   // login
   await dsLogin(apiKey, username)
